@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Old School Cassette Player with HTML5 Audio</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+	<meta name="description"
+		content="Old School Cassette Player with HTML5 Audio: Vintage format meets modern web tech: an HTML5 audio player with realistic controls" />
+	<meta name="keywords"
+		content="cassette, html5, audio, player, css3, buttons, sounds, vintage, old school, javascript, jquery" />
+	<meta name="author" content="Codrops" />
+	<link rel="shortcut icon" href="../favicon.ico">
+	<link rel="stylesheet" type="text/css" href="css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/knobKnob.css" />
+	<link href='http://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css' />
+	<script type="text/javascript" src="js/modernizr.custom.69142.js"></script>
+</head>
+
+<body>
+	<div class="container">
+
+		<header>
+
+			<h1><span>Old School Cassette Player</span> with HTML5 Audio</h1>
+			<h2>Vintage format meets modern web tech: an HTML5 audio player with realistic controls <br /><strong>Best
+					viewed &amp; listened to in modern browsers</strong></h2>
+
+		</header>
+
+		<div id="vc-container" class="vc-container">
+			<div class="vc-tape-wrapper">
+				<div class="vc-tape">
+					<div class="vc-tape-back">
+						<div class="vc-tape-wheel vc-tape-wheel-left">
+							<div></div>
+						</div>
+						<div class="vc-tape-wheel vc-tape-wheel-right">
+							<div></div>
+						</div>
+					</div>
+					<div class="vc-tape-front vc-tape-side-a">
+						<span>A</span>
+					</div>
+					<div class="vc-tape-front vc-tape-side-b">
+						<span>B</span>
+					</div>
+				</div>
+			</div>
+			<div class="vc-loader"></div>
+		</div><!-- //vc-container -->
+
+		<div class="attribution">
+			<p>Songs by <a href="http://freemusicarchive.org/music/Blue_Ducks/">Blue Ducks</a> and <a
+					href="http://freemusicarchive.org/music/Blank__Kytt/">Blank & Kytt</a>:</p>
+
+			<div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"
+				about="http://freemusicarchive.org/music/Blue_Ducks/Six/"><span property="dct:title">Six</span> (<a
+					rel="cc:attributionURL" property="cc:attributionName"
+					href="http://freemusicarchive.org/music/Blue_Ducks/">Blue Ducks</a>) / <a rel="license"
+					href="http://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a></div>
+
+			<div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"
+				about="http://freemusicarchive.org/music/Blank__Kytt/Heavy_Crazy_Serious/"><span
+					property="dct:title">Heavy, Crazy, Serious</span> (<a rel="cc:attributionURL"
+					property="cc:attributionName" href="http://blankkytt.bandcamp.com/">Blank & Kytt</a>) / <a
+					rel="license" href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></div>
+
+			<p>Cassette tape PSD by <a href="http://manicho.deviantart.com/art/Cassette-PSD-File-86548493">Mauricio
+					Estrella</a></p>
+		</div><!--//attribution-->
+
+	</div><!-- //container -->
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!-- KnobKnob by Martin Angelov : https://github.com/martinaglv/KnobKnob -->
+	<script src="js/transform.js"></script>
+	<script src="js/knobKnob.jquery.js"></script>
+
+	<script type="text/javascript" src="js/jquery.cassette.js"></script>
+	<script type="text/javascript">
+		$(function () {
+
+			$('#vc-container').cassette({
+				songs: ['Bang']
+			});
+
+			function resizeCassette() {
+				var winW = $(window).width();
+				var winH = $(window).height();
+				var isMobile = (winW <= 768 || winH <= 768) && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+				
+				if (!isMobile) {
+					$('.vc-container').css({
+						'width': '640px',
+						'height': '500px',
+						'transform': 'none',
+						'position': 'relative',
+						'margin': '0 auto 50px auto',
+						'top': 'auto',
+						'left': 'auto'
+					});
+					$('.vc-tape-wrapper').css({
+						'transform': 'none',
+						'position': 'relative',
+						'top': 'auto',
+						'left': 'auto',
+						'margin': '0'
+					});
+					$('.vc-tape').css({
+						'margin': '30px auto 0'
+					});
+					$('.vc-controls').css({
+						'position': 'absolute',
+						'bottom': '18px',
+						'left': '50%',
+						'transform': 'none',
+						'margin': '0 0 0 -229px'
+					});
+					$('body').css({
+						'overflow': 'auto',
+						'background-color': '',
+						'background-image': ''
+					});
+					$('.container > header, .attribution, .codrops-top').show();
+					return;
+				}
+
+				$('.container > header, .attribution, .codrops-top').hide();
+				$('body, html').css({
+					'overflow': 'hidden',
+					'margin': 0,
+					'padding': 0,
+					'width': '100%',
+					'height': '100%',
+					'background-color': '#111',
+					'background-image': 'none'
+				});
+				
+				$('.container').css({
+					'width': '100%',
+					'height': '100%',
+					'position': 'fixed',
+					'top': 0,
+					'left': 0
+				});
+
+				$('.vc-container').css({
+					'width': '100%',
+					'height': '100%',
+					'position': 'absolute',
+					'top': 0,
+					'left': 0,
+					'margin': 0,
+					'transform': 'none'
+				});
+
+				var tapeW = 586;
+				var tapeH = 379;
+				var isPortrait = winH > winW;
+				
+				var tapeScale, transformStr;
+				if (isPortrait) {
+					// tape is rotated 90deg, so it takes tapeH width and tapeW height
+					tapeScale = Math.min(winW / tapeH, (winH - 80) / tapeW) * 0.95;
+					transformStr = 'translate(-50%, -50%) rotate(90deg) scale(' + tapeScale + ')';
+				} else {
+					tapeScale = Math.min(winW / tapeW, (winH - 80) / tapeH) * 0.95;
+					transformStr = 'translate(-50%, -50%) scale(' + tapeScale + ')';
+				}
+				
+				$('.vc-tape-wrapper').css({
+					'position': 'absolute',
+					'top': ((winH - 80) / 2) + 'px',
+					'left': '50%',
+					'width': tapeW + 'px',
+					'height': tapeH + 'px',
+					'margin': 0,
+					'transform': transformStr,
+					'transform-origin': 'center center'
+				});
+
+				$('.vc-tape').css({
+					'margin': 0
+				});
+
+				$('.vc-controls').css({
+					'position': 'absolute',
+					'bottom': '20px',
+					'left': '2%',
+					'width': '96%',
+					'transform': 'none',
+					'margin': '0'
+				});
+			}
+
+			$(window).on('resize', resizeCassette);
+			resizeCassette();
+
+		});
+	</script>
+</body>
+
+</html>
